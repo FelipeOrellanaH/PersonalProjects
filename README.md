@@ -17,7 +17,7 @@ Linux:
 -Mysql .
 -PHP 7.2.
 -Importar Base de Datos.
--Crear una carpeta en el directorio de ScriptV llamada "Logs", en esta carpeta se almacenará el registro de cada dato que se almacena en la Base De Datos por cada ejecución.
+-Crear una carpeta en el directorio de ScriptV llamada "logs", en esta carpeta se almacenará el registro de cada dato que se almacena en la Base De Datos por cada ejecución.
 
 
 Intrucciones:
