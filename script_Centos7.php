@@ -141,7 +141,9 @@
 
 
 
-	$ar=fopen(dirname(__FILE__)."\Logs\log_".date("Y-m-d").".txt", "a+");
+	
+	$ar=fopen(dirname(__FILE__)."/logs/log_".date("Y-m-d").".txt", "a+");
+	
 	fwrite($ar, "FECHA|TIPO|MENSAJE|ID" .PHP_EOL);
 
 	//*******************************************************************************************************************
@@ -235,7 +237,7 @@
 
 
 
-
+		
 
 		//*******************************************************************************************************************
 		//****************************************** RECORRER Y ALMACENAR MEMBRESIA *****************************************
@@ -296,7 +298,7 @@
 
 
 
-
+	
 
 
 
@@ -316,6 +318,8 @@
 
 		$actions= json_decode($jsonAcci,true);
 
+
+		
 
 
 		//*******************************************************************************************************************
@@ -344,7 +348,17 @@
 			$id =($lists[$k]['id']);
 			$idTablero =($lists[$k]['idBoard']);
 			$posicion =($lists[$k]['pos']);
-			$archivado = ($lists[$k]['closed']);
+
+			
+			if($lists[$k]['closed'] == false)
+			{
+				$archivado = 0;
+			}else{
+				$archivado  = 1;
+			}
+
+
+
 			$fechaArchivado = "No Aplica";
 			$horaArchivado = "No Aplica";
 
@@ -387,7 +401,7 @@
 					$sql= "UPDATE lista SET nombre ='$nombre' , id = '$id', idTablero= '$idTablero', posicion= '$posicion',archivado ='$archivado', fechaArchivado = '$fechaArchivado[0]',horaArchivado = '$horaArchivado[0]' WHERE lista.id = '".$id."'"; 		
 					$ejecutar = mysqli_query($conectar ,$sql); 
 
-					if($ejecutar == false)
+					if($ejecutar == 0)
 					{
 						$tipolog="lista_error";
 						createLog($tipolog,$id);
@@ -406,7 +420,7 @@
 					$sql = "INSERT INTO lista VALUES ('$nombre' , '$id', '$idTablero', '$posicion' ,'$archivado', '$fechaArchivado[0]','$horaArchivado[0]')"; 
 					$ejecutar = mysqli_query($conectar ,$sql);
 
-					if($ejecutar == false)
+					if($ejecutar == 0)
 					{
 						$tipolog = "lista_error";
 						createLog($tipolog,$id);
@@ -432,15 +446,28 @@
 			//*************************************** ALMACENAMOS LAS LISTAS NO ARCHIVADAS ***************************************************
 			//********************************************************************************************************************************
 
-				$consultaExiste = "SELECT COUNT(*) FROM lista WHERE lista.id = '".$id."'";
+				$consultaExiste = "SELECT COUNT(*) FROM lista WHERE lista.id = '".$id."'"; 
 				$ejecutarValidacion = mysqli_query($conectar,$consultaExiste); 
 				$num = mysqli_fetch_row($ejecutarValidacion);
+
 
 				if($num[0] == 1)
 				{	
 					$sql= " UPDATE lista SET nombre ='$nombre', id = '$id', idTablero= '$idTablero', posicion= '$posicion',archivado ='$archivado', fechaArchivado = '$fechaArchivado',horaArchivado = '$horaArchivado' WHERE lista.id = '".$id."'"; 		
 					$ejecutar = mysqli_query($conectar ,$sql); 
-					if($ejecutar==false)
+
+
+					ECHO "sql : (sql-string) |";
+				var_dump($sql);
+				ECHO"| --- ".PHP_EOL;
+
+
+				ECHO "ejecutar : (sql-string) |";
+				var_dump($ejecutar);
+				ECHO"| --- ".PHP_EOL;
+
+
+					if($ejecutar==0)
 					{
 						$tipolog="lista_error";
 						createLog($tipolog,$id);
@@ -454,7 +481,21 @@
 					$sql = "INSERT INTO lista VALUES ('$nombre' , '$id', '$idTablero', '$posicion' ,'$archivado', '$fechaArchivado','$horaArchivado')"; 
 					$ejecutar = mysqli_query($conectar ,$sql);
 
-					if($ejecutar == false){
+
+
+
+					ECHO "sql : (sql-string) |";
+				var_dump($sql);
+				ECHO"| --- ".PHP_EOL;
+
+
+				ECHO "ejecutar : (sql-string) |";
+				var_dump($ejecutar);
+				ECHO"| --- ".PHP_EOL;
+
+
+
+					if($ejecutar == 0){
 						$tipolog = "lista_error";
 						createLog($tipolog,$id);
 					}else
@@ -470,6 +511,8 @@
 			//******************************************************************************************************************************
 
 
+
+			
 
 			//******************************************************************************************************************************
 			//*************************************************** RECORRER ACCION CREAR LISTA ***********************************************
@@ -521,14 +564,14 @@
 						$sql= " UPDATE accion_crear_lista SET id ='$id' , tipo = '$tipo', fecha= '$fecha[0]', hora= '$hora[0]', idTablero = '$idTablero', idLista = '$idLista', nombreLista = '$nombreLista' ,nombreAutor = '$nombreAutor',idAutor = '$idAutor' WHERE accion_crear_lista.id = '".$id."'";
 						$ejecutar = mysqli_query($conectar ,$sql);
 						
-						if($ejecutar === false)
+						if($ejecutar == 0)
 						{
 							$tipolog = "accion_crear_lista_error";
 							createLog($tipolog,$id);
 							
 						}else
 						{
-							$actualizar = true;
+							$actualizar = 1;
 							$tipolog = "accion_crear_lista";
 							createLog($tipolog,$id);
 						}
@@ -538,7 +581,7 @@
 							$sql = "INSERT INTO accion_crear_lista VALUES ('$id' ,'$tipo', '$fecha[0]','$hora[0]', '$idTablero', '$idLista', '$nombreLista','$nombreAutor','$idAutor')";
 							$ejecutar = mysqli_query($conectar ,$sql); 
 
-							if($ejecutar == false)
+							if($ejecutar == 0)
 							{
 								$tipolog = "accion_crear_lista_error";
 								createLog($tipolog,$id);
@@ -553,12 +596,14 @@
 			}//FOR ACCIONES
 
 
+		
 
 
 
 
+ 	 	}//FOR LISTAS 
 
- 	 	}//FOR LISTAS
+ 	 	
  	 	
  		
 
@@ -572,7 +617,7 @@
 
 
 
-
+	
 
  	  //**********************************************************************************************************************
 	  //***************************************************** GET TARJETAS ***************************************************
@@ -607,13 +652,24 @@
 			$posicionEnLista =($cards[$m]['pos']);
 			$shortLink =($cards[$m]['shortLink']);
 			$archivado = ($cards[$m]['closed']);
+			if ($cards[$m]['closed']== false) {
+				$archivado=0;
+			}else{
+				$archivado=1;
+			}
+
 			$fechaArchivado = "No Aplica";
 			$horaArchivado = "No Aplica";
 			$dia_ultima_actividad = explode("T", date(DATE_ISO8601, strtotime($cards[$m]['dateLastActivity']))); 
 			$hora_ultima_actividad = explode("-", $dia_ultima_actividad[1]); 
 			$dia_expiracion =explode("T", date(DATE_ISO8601, strtotime($cards[$m]['due']))); 
 			$hora_expiracion = 	 explode("-", $dia_expiracion[1]); 
-			$expiracion_Completada = ($cards[$m]['dueComplete']);
+			
+			if ($cards[$m]['dueComplete']== false) {
+				$expiracion_Completada=0;
+			}else{
+				$expiracion_Completada=1;
+			}
 
 			
 			
@@ -738,7 +794,7 @@
 
 
 
-
+		
 
 	
 	
@@ -828,7 +884,7 @@
 
 
 
-
+			
 		 
 
 
@@ -1195,7 +1251,7 @@
 			}//SWITCH
 
 		}//FOR TEST 2
- 
+ 	
 	}//tarjetas
 
 
@@ -1421,7 +1477,8 @@
 					}		
 					break;
 		}//switch
-	}//for actions		
+	}//for actions	
+	
  }//tableros
 
 
@@ -1479,7 +1536,8 @@
 	function createLog($tipomsj,$id)
 	{		
 		
-		$ar=fopen(dirname(__FILE__)."\Logs\log_".date("Y-m-d").".txt", "a+");
+		$ar=fopen(dirname(__FILE__)."/logs/log_".date("Y-m-d").".txt", "a+");
+		
 		switch ($tipomsj) {
 
 			//******************************************MENSAJES EXITOSOS********************************************************
