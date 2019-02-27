@@ -457,16 +457,6 @@
 					$ejecutar = mysqli_query($conectar ,$sql); 
 
 
-					ECHO "sql : (sql-string) |";
-				var_dump($sql);
-				ECHO"| --- ".PHP_EOL;
-
-
-				ECHO "ejecutar : (sql-string) |";
-				var_dump($ejecutar);
-				ECHO"| --- ".PHP_EOL;
-
-
 					if($ejecutar==0)
 					{
 						$tipolog="lista_error";
@@ -480,18 +470,6 @@
 				{
 					$sql = "INSERT INTO lista VALUES ('$nombre' , '$id', '$idTablero', '$posicion' ,'$archivado', '$fechaArchivado','$horaArchivado')"; 
 					$ejecutar = mysqli_query($conectar ,$sql);
-
-
-
-
-					ECHO "sql : (sql-string) |";
-				var_dump($sql);
-				ECHO"| --- ".PHP_EOL;
-
-
-				ECHO "ejecutar : (sql-string) |";
-				var_dump($ejecutar);
-				ECHO"| --- ".PHP_EOL;
 
 
 
@@ -1222,6 +1200,11 @@
 						{	
 							$sql= " UPDATE accion_mover_tarjeta_de_tablero SET id ='$id' , tipo = '$tipo', fecha= '$fecha[0]', hora= '$hora[0]',idTarjeta = '$idTarjeta' ,tableroOrigen = '$tableroOrigen', tableroDestino = '$tableroDestino', nombreAutor = '$nombreAutor',idAutor = '$idAutor' WHERE accion_mover_tarjeta_de_tablero.id = '".$id."'";
 							$ejecutar = mysqli_query($conectar ,$sql); 
+							
+							ECHO "sql : (sql-string) |";
+							var_dump($sql);
+							ECHO"| --- ".PHP_EOL;
+
 							if($ejecutar==false)
 							{
 								$tipolog = "accion_mover_tarjeta_de_tablero_error";
@@ -1238,6 +1221,11 @@
 						{
 							$sql = "INSERT INTO accion_mover_tarjeta_de_tablero VALUES ('$id' ,'$tipo', '$fecha[0]','$hora[0]','$idTarjeta', '$tableroOrigen', '$tableroDestino','$nombreAutor','$idAutor' )";
 							$ejecutar = mysqli_query($conectar ,$sql); 
+							
+							ECHO "sql : (sql-string) |";
+							var_dump($sql);
+							ECHO"| --- ".PHP_EOL;
+
 							if($ejecutar==false)
 							{
 								$tipolog = "accion_mover_tarjeta_de_tablero_error";
