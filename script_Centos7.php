@@ -1213,7 +1213,13 @@
 
 
 						$consultaExiste = "SELECT COUNT(*) FROM accion_mover_tarjeta_de_tablero WHERE accion_mover_tarjeta_de_tablero.id = '".$id."'";
-						$ejecutarValidacion = mysqli_query($conectar,$consultaExiste); 
+
+						if(mysqli_query($conectar,$consultaExiste)==true)
+						{
+							$ejecutarValidacion=1;
+						}
+						$ejecutarValidacion=1;
+
 						$num = mysqli_fetch_row($ejecutarValidacion);
 
 						//*************************************** ALMACENAMOS EL MOVIMIENTO DE UNA TARJETA DE UN TABLERO OTRO ***************************************************
