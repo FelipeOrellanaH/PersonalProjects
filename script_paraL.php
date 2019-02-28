@@ -190,7 +190,12 @@
 	 	$nombre = ($boards[$i]['name']);
 		$id =($boards[$i]['id']);
 		$shortLink =($boards[$i]['shortLink']);
-		$closed =($boards[$i]['closed']);
+		if ($boards[$i]['closed']==true) {
+			$closed=1;
+		}else{
+			$closed=0;
+		}
+		
 		
 
 		echo "Obteniendo los datos del tablero: ".$nombre.PHP_EOL." | ";
