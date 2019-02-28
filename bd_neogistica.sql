@@ -195,8 +195,68 @@ CREATE TABLE `tarjeta` (
   `hora_expiracion` varchar(300) DEFAULT NULL,
   `expiracion_Completada` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Indices de la tabla `accion_crear_lista`
+--
+ALTER TABLE `accion_crear_lista`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `accion_crear_tarjeta`
+--
+ALTER TABLE `accion_crear_tarjeta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `accion_extras`
+--
+ALTER TABLE `accion_extras`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `accion_mover_tarjeta_de_lista`
+--
+ALTER TABLE `accion_mover_tarjeta_de_lista`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `accion_mover_tarjeta_tablero`
+  ADD PRIMARY KEY (`id`);
+
+
+--
+-- Indices de la tabla `accion_registros_archivado`
+--
+ALTER TABLE `accion_registros_archivado`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `lista`
+--
+ALTER TABLE `lista`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `membresia`
+--
+ALTER TABLE `membresia`
+  ADD PRIMARY KEY (`idMembresia`);
+
+--
+-- Indices de la tabla `tablero`
+--
+ALTER TABLE `tablero`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tarjeta`
+--
+ALTER TABLE `tarjeta`
+  ADD PRIMARY KEY (`id`),;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
