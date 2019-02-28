@@ -219,7 +219,7 @@ ALTER TABLE `accion_extras`
 ALTER TABLE `accion_mover_tarjeta_de_lista`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `accion_mover_tarjeta_tablero`
+ALTER TABLE `accion_mover_tarjeta_de_tablero`
   ADD PRIMARY KEY (`id`);
 
 
