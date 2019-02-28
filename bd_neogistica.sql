@@ -251,7 +251,7 @@ ALTER TABLE `tablero`
 -- Indices de la tabla `tarjeta`
 --
 ALTER TABLE `tarjeta`
-  ADD PRIMARY KEY (`id`),;
+  ADD PRIMARY KEY (`id`);
 
 
 COMMIT;
