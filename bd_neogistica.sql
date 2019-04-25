@@ -108,7 +108,8 @@ CREATE TABLE `accion_mover_tarjeta_de_tablero` (
   `tableroOrigen` varchar(300) NOT NULL,
   `tableroDestino` varchar(300) NOT NULL,
   `nombreAutor` varchar(300) NOT NULL,
-  `idAutor` varchar(300) NOT NULL
+  `idAutor` varchar(300) NOT NULL,
+  `listaDestino` varchar(300) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
