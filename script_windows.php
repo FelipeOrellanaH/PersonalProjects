@@ -1148,7 +1148,8 @@
 						$tableroOrigen = $test2[$l]['data']['boardSource']['id'];
 						$tableroDestino = $test2[$l]['data']['board']['id'];
 						$nombreAutor = $test2[$l]['memberCreator']['fullName'];
-						$idAutor = $test2[$l]['memberCreator']['id'];		
+						$idAutor = $test2[$l]['memberCreator']['id'];	
+						$listaDestino = $test2[$l]['data']['list']['id'];
 
 
 
@@ -1164,7 +1165,7 @@
 
 						if($num[0] == 1)
 						{	
-							$sql= " UPDATE accion_mover_tarjeta_de_tablero SET id ='$id' , tipo = '$tipo', fecha= '$fecha[0]', hora= '$hora[0]',idTarjeta = '$idTarjeta' ,tableroOrigen = '$tableroOrigen', tableroDestino = '$tableroDestino', nombreAutor = '$nombreAutor',idAutor = '$idAutor' WHERE accion_mover_tarjeta_de_tablero.id = '".$id."'";
+							$sql= " UPDATE accion_mover_tarjeta_de_tablero SET id ='$id' , tipo = '$tipo', fecha= '$fecha[0]', hora= '$hora[0]',idTarjeta = '$idTarjeta' ,tableroOrigen = '$tableroOrigen', tableroDestino = '$tableroDestino', nombreAutor = '$nombreAutor',idAutor = '$idAutor', listaDestino = '$listaDestino' WHERE accion_mover_tarjeta_de_tablero.id = '".$id."'";
 							$ejecutar = mysqli_query($conectar ,$sql); 
 							if($ejecutar==false)
 							{
@@ -1180,7 +1181,7 @@
 							
 						}else
 						{
-							$sql = "INSERT INTO accion_mover_tarjeta_de_tablero VALUES ('$id' ,'$tipo', '$fecha[0]','$hora[0]','$idTarjeta', '$tableroOrigen', '$tableroDestino','$nombreAutor','$idAutor' )";
+							$sql = "INSERT INTO accion_mover_tarjeta_de_tablero VALUES ('$id' ,'$tipo', '$fecha[0]','$hora[0]','$idTarjeta', '$tableroOrigen', '$tableroDestino','$nombreAutor','$idAutor','$listaDestino' )";
 							$ejecutar = mysqli_query($conectar ,$sql); 
 							if($ejecutar==false)
 							{
